@@ -16,3 +16,15 @@ class WebscraperItem(scrapy.Item):
         input_processor=MapCompose(str.strip),
         output_processor=TakeFirst()
     )
+    product_price = scrapy.Field(
+        input_processor=MapCompose(str.strip),
+        output_processor=TakeFirst()
+    )
+    product_initial_price = scrapy.Field(
+        input_processor=MapCompose(str.strip),
+        output_processor=TakeFirst()
+    )
+    product_image = scrapy.Field(
+        input_processor=MapCompose(str.strip),
+        output_processor=TakeFirst()
+    )

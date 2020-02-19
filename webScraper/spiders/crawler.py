@@ -11,8 +11,6 @@ class CrawlerSpider(scrapy.Spider):
     start_urls = ['https://www.emag.ro/laptopuri/c']
 
     # custom definitions
-    page_number = 2
-
     def parse(self, response):
         # initialization of item instance
         items = WebscraperItem()
@@ -22,14 +20,19 @@ class CrawlerSpider(scrapy.Spider):
         for product in product_content:
             loader = ItemLoader(item=WebscraperItem(), selector=product)
             loader.add_xpath('product_name', './/a[@class="product-title js-product-url"]/text()')
+            loader.add_css('product_price', '.product-new-price::text')
+            loader.add_css('product_initial_price', 's::text')
+            loader.add_css('product_image', '.lozad::attr(data-src)')
 
             # build a list with scraped items
             yield loader.load_item()
 
             # extract data from multiple pages
-            next_page = 'https://www.emag.ro/laptopuri/p' + str(CrawlerSpider.page_number) + '/c'
-            if CrawlerSpider.page_number <= 10:
-                CrawlerSpider.page_number += 1
-                yield response.follow(next_page, callback=self.parse)
+            next_page = response.css('#listing-paginator li:last-child a::attr(href)').get()
+            if next_page is not None and next_page != "javascript:void(0)":
+                next_page = response.urljoin(next_page)
+                yield scrapy.Request(next_page, callback=self.parse)
+
+
 
 
