@@ -16,6 +16,6 @@ If, however, you choose to use this program for malicious purposes, we as a comm
  - ~~user agent~~
  - ~~download_delay and auto_throttle for better scraping~~
  -  database to store the scraped data
- - download from multiple pages
+ - ~~download from multiple pages~~
  - customization for product items
  - ... more will come
