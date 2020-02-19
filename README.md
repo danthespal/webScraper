@@ -10,6 +10,9 @@ If, however, you choose to use this program for malicious purposes, we as a comm
 - SQLAlchemy 1.3.13
 - Build Tools (C++)
 - PyCharm (Optional IDE but recommended)
+If you use Pycharm, the following libraries will be detected as missing and installed automatically
+if not, you can manually install them by:
+pip install -r requirements.txt
 
 # TODOS
  - ~~base structure for downloading items~~
