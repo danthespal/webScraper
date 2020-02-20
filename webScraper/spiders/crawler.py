@@ -1,8 +1,6 @@
-# -*- coding: utf-8 -*-
 import scrapy
 from scrapy.loader import ItemLoader
 from ..items import WebscraperItem
-
 
 class CrawlerSpider(scrapy.Spider):
     # do not change name variables
@@ -19,10 +17,16 @@ class CrawlerSpider(scrapy.Spider):
         # simple loop
         for product in product_content:
             loader = ItemLoader(item=WebscraperItem(), selector=product)
+            '''
+            XPath offers more features than pure CSS selection (the Wikipedia article gives a nice overview), 
+            at the cost of being harder to learn. Scrapy converts CSS selectors to XPath internally, 
+            so the .css() function is basically syntactic sugar for .xpath().
+            * use xpath selector for better performance in the future
+            '''
             loader.add_xpath('product_name', './/a[@class="product-title js-product-url"]/text()')
-            loader.add_css('product_price', '.product-new-price::text')
-            loader.add_css('product_initial_price', 's::text')
-            loader.add_css('product_image', '.lozad::attr(data-src)')
+            loader.add_xpath('product_price', './/p[@class="product-new-price"]/text()')
+            loader.add_xpath('product_initial_price', './/s/text()')
+            loader.add_xpath('product_image', './/img[@class="lozad"]/@data-src')
 
             # build a list with scraped items
             yield loader.load_item()
