@@ -64,7 +64,12 @@ class SaveWebscraperPipeline(object):
         product = Product()
         product.product_name = item["product_name"]
         product.product_price = item["product_price"]
-        product.product_initial_price = item["product_initial_price"]
+
+        if 'product.product_initial_price = item["product_initial_price"]' is not None:
+            return item
+        else:
+            pass
+
         product.product_image = item["product_image"]
 
         session.add(product)

@@ -25,7 +25,11 @@ class CrawlerSpider(scrapy.Spider):
             '''
             loader.add_xpath('product_name', './/a[@class="product-title js-product-url"]/text()')
             loader.add_xpath('product_price', './/p[@class="product-new-price"]/text()')
-            loader.add_xpath('product_initial_price', './/s/text()')
+            product_initial_price_exists = response.xpath(".//s").extract_first(default='not-found')
+            if product_initial_price_exists == 'not-found':
+                pass
+            else:
+                loader.add_xpath('product_initial_price', './/s/text()')
             loader.add_xpath('product_image', './/img[@class="lozad"]/@data-src')
 
             # build a list with scraped items
