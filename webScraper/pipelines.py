@@ -18,6 +18,33 @@ storing the scraped item in a database
 # See: https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 '''
 
-class WebscraperPipeline(object):
+from sqlalchemy.orm import sessionmaker
+from .models import Product, db_connect, create_table
+
+class SaveWebscraperPipeline(object):
+    def __init__(self):
+        """
+        Initializes database connection and sessionmaker
+        Creates tables
+        """
+        engine = db_connect()
+        create_table(engine)
+        self.Session = sessionmaker(bind=engine)
+
     def process_item(self, item, spider):
+        """Save quotes in the database
+        This method is called for every item pipeline component
+        """
+        session = self.Session()
+        product = Product()
+        product.product_name = item["product_name"]
+        product.product_price = item["product_price"]
+        product.product_initial_price = item["product_initial_price"]
+        product.product_image = item["product_image"]
+
+        session.add(product)
+        session.commit()
+
+        session.close()
+
         return item

@@ -12,6 +12,18 @@ BOT_NAME = 'webScraper'
 SPIDER_MODULES = ['webScraper.spiders']
 NEWSPIDER_MODULE = 'webScraper.spiders'
 
+# SQLite
+CONNECTION_STRING = 'sqlite:///scrapy_quotes.db'
+
+# MySQL
+# CONNECTION_STRING = "{drivername}://{user}:{passwd}@{host}:{port}/{db_name}?charset=utf8".format(
+#     drivername="mysql",
+#     user="root",
+#     passwd="password",
+#     host="localhost",
+#     port="3306",
+#     db_name="webscraper",
+# )
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'webScraper (+http://www.yourdomain.com)'
@@ -68,9 +80,9 @@ DOWNLOADER_MIDDLEWARES = {
 
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
-#ITEM_PIPELINES = {
-#    'webScraper.pipelines.WebscraperPipeline': 300,
-#}
+ITEM_PIPELINES = {
+    'webScraper.pipelines.SaveWebscraperPipeline': 300,
+}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://docs.scrapy.org/en/latest/topics/autothrottle.html
