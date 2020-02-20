@@ -34,8 +34,8 @@ foo@bar:~$ scrapy crawl crawler -o items.json
  - ~~download_delay and auto_throttle for better scraping~~
  - ~~download from multiple pages~~
  - ~~database to store the scraped data~~
+ - ~~check for duplicates product_name~~
  - establish list of sites
  - remove unicode from product names
- - check for duplicates product_name
  - customization for product items
  - ... more will come
