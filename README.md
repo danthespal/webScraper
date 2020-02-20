@@ -33,7 +33,7 @@ foo@bar:~$ scrapy crawl crawler -o items.json
  - ~~user agent~~
  - ~~download_delay and auto_throttle for better scraping~~
  - ~~download from multiple pages~~
- ~~- database to store the scraped data~~
+ - ~~database to store the scraped data~~
  - establish list of sites
  - remove unicode from product names
  - check for duplicates product_name
