@@ -35,7 +35,7 @@ class Product(Base):
     __tablename__ = "items"
 
     id = Column(Integer, primary_key=True)
-    product_name = Column('product_name', String(200), unique=True)
+    product_name = Column('product_name', String(300))
     product_price = Column('product_price', String(10))
     product_initial_price = Column('product_initial_price', String(10))
     product_image = Column('product_image', Text())

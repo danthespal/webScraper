@@ -13,7 +13,7 @@ SPIDER_MODULES = ['webScraper.spiders']
 NEWSPIDER_MODULE = 'webScraper.spiders'
 
 # SQLite
-CONNECTION_STRING = 'sqlite:///scrapy_quotes.db'
+CONNECTION_STRING = 'sqlite:///products.db'
 
 # MySQL
 # CONNECTION_STRING = "{drivername}://{user}:{passwd}@{host}:{port}/{db_name}?charset=utf8".format(
@@ -81,6 +81,7 @@ DOWNLOADER_MIDDLEWARES = {
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
+    'webScraper.pipelines.DuplicatesScraperPipeline': 200,
     'webScraper.pipelines.SaveWebscraperPipeline': 300,
 }
 

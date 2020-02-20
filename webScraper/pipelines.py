@@ -20,6 +20,30 @@ storing the scraped item in a database
 
 from sqlalchemy.orm import sessionmaker
 from .models import Product, db_connect, create_table
+from scrapy.exceptions import DropItem
+import logging
+
+class DuplicatesScraperPipeline(object):
+
+    def __init__(self):
+        """
+        Initializes database connection and sessionmaker.
+        Creates tables.
+        """
+        engine = db_connect()
+        create_table(engine)
+        self.Session = sessionmaker(bind=engine)
+        logging.info("****DuplicatesScraperPipeline: database connected****")
+
+    def process_item(self, item, spider):
+        session = self.Session()
+        exist_product_name = session.query(Product).filter_by(product_name = item["product_name"]).first()
+        if exist_product_name is not None:  # the current product_name exists
+            raise DropItem("Duplicate item found: %s" % item["product_name"])
+            session.close()
+        else:
+            return item
+            session.close()
 
 class SaveWebscraperPipeline(object):
     def __init__(self):
@@ -30,6 +54,7 @@ class SaveWebscraperPipeline(object):
         engine = db_connect()
         create_table(engine)
         self.Session = sessionmaker(bind=engine)
+        logging.info("****SaveWebscraperPipeline: database connected****")
 
     def process_item(self, item, spider):
         """Save quotes in the database
