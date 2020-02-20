@@ -7,6 +7,7 @@ If, however, you choose to use this program for malicious purposes, we as a comm
 # webScraper requirements:
 - Scrapy framework 1.8.0
 - scrapy-user-agents 0.1.1
+- scrapy-proxy-pool 0.1.6
 - SQLAlchemy 1.3.13
 - Build Tools (C++)
 - PyCharm (Optional IDE but recommended)
