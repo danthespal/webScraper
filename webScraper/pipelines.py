@@ -59,17 +59,20 @@ class SaveWebscraperPipeline(object):
         logging.info("****SaveWebscraperPipeline: database connected****")
 
     def process_item(self, item, spider):
-        """Save quotes in the database
+        """
+        Save quotes in the database
         This method is called for every item pipeline component
         """
         session = self.Session()
         product = Product()
         item.setdefault('product_initial_price', 'NULL')
+        item.setdefault('product_stock', 'NULL')
 
         product.product_name = item["product_name"]
         product.product_price = item["product_price"]
         product.product_initial_price = item["product_initial_price"]
         product.product_image = item["product_image"]
+        product.product_stock = item["product_stock"]
 
         session.add(product)
         session.commit()

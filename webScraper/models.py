@@ -40,4 +40,5 @@ class Product(Base):
     product_name = Column('product_name', String(300))
     product_price = Column('product_price', String(10))
     product_initial_price = Column('product_initial_price', String(10))
-    product_image = Column('product_image', Text())
+    product_image = Column('product_image', Text()),
+    product_stock = Column('product_stock', String(10))

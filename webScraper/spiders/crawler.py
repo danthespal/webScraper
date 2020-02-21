@@ -4,14 +4,14 @@ from ..items import WebscraperItem
 
 
 class CrawlerSpider(scrapy.Spider):
-    # do not change name variables
-    # from next 2 lines
+    # do not change viariable name
+    # for next 2 lines
     name = 'crawler'
     start_urls = ['https://www.emag.ro/laptopuri/c']
 
-    # custom definitions
     def parse(self, response):
         self.logger.info('Parse function called on {}'.format(response.url))
+
         # initialization of item instance
         product_content = response.xpath("//div[@class='card-section-wrapper js-section-wrapper']")
 
@@ -28,6 +28,7 @@ class CrawlerSpider(scrapy.Spider):
             loader.add_xpath('product_price', './/p[@class="product-new-price"]/text()')
             loader.add_xpath('product_initial_price', './/s/text()')
             loader.add_xpath('product_image', './/img[@class="lozad"]/@data-src')
+            loader.add_xpath('product_stock', './/p[@class="product-stock-status text-availability-in_stock"]/text()')
 
             # build a list with scraped items
             yield loader.load_item()

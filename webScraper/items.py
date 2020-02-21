@@ -29,6 +29,7 @@ def remove_unicode(text):
     text = text.replace(u'\u00ae', '').replace(u'\u2122', '')
     return text
 
+
 class WebscraperItem(Item):
     # define the fields for your item here like:
     # name = Field()
@@ -48,6 +49,10 @@ class WebscraperItem(Item):
         output_processor=TakeFirst()
     )
     product_image = Field(
+        input_processor=MapCompose(str.strip),
+        output_processor=TakeFirst()
+    )
+    product_stock = Field(
         input_processor=MapCompose(str.strip),
         output_processor=TakeFirst()
     )
