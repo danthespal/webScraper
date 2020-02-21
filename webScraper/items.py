@@ -19,29 +19,35 @@ leaks with trackref), etc.
 # See documentation in:
 # https://docs.scrapy.org/en/latest/topics/items.html
 """
-import scrapy
+
+from scrapy.item import Item, Field
 from scrapy.loader.processors import MapCompose, TakeFirst
 
 
-class WebscraperItem(scrapy.Item):
+def remove_unicode(text):
+    # strip the unicode product_name
+    text = text.replace(u'\u00ae', '').replace(u'\u2122', '')
+    return text
+
+class WebscraperItem(Item):
     # define the fields for your item here like:
-    # name = scrapy.Field()
+    # name = Field()
     #
     # see https://docs.scrapy.org/en/latest/topics/loaders.html
     # to understand why we use loaders
-    product_name = scrapy.Field(
+    product_name = Field(
+        input_processor=MapCompose(str.strip, remove_unicode),
+        output_processor=TakeFirst()
+    )
+    product_price = Field(
         input_processor=MapCompose(str.strip),
         output_processor=TakeFirst()
     )
-    product_price = scrapy.Field(
+    product_initial_price = Field(
         input_processor=MapCompose(str.strip),
         output_processor=TakeFirst()
     )
-    product_initial_price = scrapy.Field(
-        input_processor=MapCompose(str.strip),
-        output_processor=TakeFirst()
-    )
-    product_image = scrapy.Field(
+    product_image = Field(
         input_processor=MapCompose(str.strip),
         output_processor=TakeFirst()
     )

@@ -14,8 +14,7 @@ See: https://blog.bitsrc.io/what-is-an-orm-and-why-you-should-use-it-b2b6f75f5e2
 """
 
 from scrapy.utils.project import get_project_settings
-from sqlalchemy import (
-    Integer, String, Text)
+from sqlalchemy import (Integer, String, Text)
 from sqlalchemy import create_engine, Column
 from sqlalchemy.ext.declarative import declarative_base
 

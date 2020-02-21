@@ -18,12 +18,12 @@ class CrawlerSpider(scrapy.Spider):
         # simple loop
         for product in product_content:
             loader = ItemLoader(item=WebscraperItem(), selector=product)
-            '''
+            """
             XPath offers more features than pure CSS selection (the Wikipedia article gives a nice overview), 
             at the cost of being harder to learn. Scrapy converts CSS selectors to XPath internally, 
             so the .css() function is basically syntactic sugar for .xpath().
             * use xpath selector for better performance in the future
-            '''
+            """
             loader.add_xpath('product_name', './/a[@class="product-title js-product-url"]/text()')
             loader.add_xpath('product_price', './/p[@class="product-new-price"]/text()')
             loader.add_xpath('product_initial_price', './/s/text()')

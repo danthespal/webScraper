@@ -5,7 +5,7 @@ webScraper is a application made in python by community with love, the purpose o
 If, however, you choose to use this program for malicious purposes, we as a community or as an individual, do not assume any risk of a legal nature.
 
 # webScraper requirements:
-- Scrapy framework 1.8.0
+- Scrapy 1.8.0
 - scrapy-user-agents 0.1.1
 - scrapy-proxy-pool 0.1.6
 - SQLAlchemy 1.3.13
@@ -36,7 +36,10 @@ foo@bar:~$ scrapy crawl crawler -o items.json
  - ~~download from multiple pages~~
  - ~~database to store the scraped data~~
  - ~~check for duplicates product_name~~
+ - ~~scrap price, initial_price and image_src~~
+ - ~~null value for product_initial_price if in website is not present~~
+  - ~~remove unicode from product names~~
+ - find a way to download all elements from website
  - establish list of sites
- - remove unicode from product names
  - customization for product items
  - ... more will come
