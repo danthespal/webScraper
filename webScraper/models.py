@@ -1,4 +1,4 @@
-'''
+"""
 SQLAlchemy is the Python SQL toolkit and Object Relational Mapper
 that gives application developers the full power and flexibility of SQL.
 
@@ -11,7 +11,7 @@ Here, I use Object-Relational Mapping (ORM) to query and manipulate data
 from the database using the object-oriented paradigm. In particular, I use SQLAlchemy.
 I won’t cover the details of ORM and please refer to this article for some Pros and Cons.
 See: https://blog.bitsrc.io/what-is-an-orm-and-why-you-should-use-it-b2b6f75f5e2a
-'''
+"""
 
 from scrapy.utils.project import get_project_settings
 from sqlalchemy import (
@@ -21,6 +21,7 @@ from sqlalchemy.ext.declarative import declarative_base
 
 Base = declarative_base()
 
+
 def db_connect():
     """
     Performs database connection using database settings from settings.py.
@@ -28,8 +29,10 @@ def db_connect():
     """
     return create_engine(get_project_settings().get("CONNECTION_STRING"))
 
+
 def create_table(engine):
     Base.metadata.create_all(engine)
+
 
 class Product(Base):
     __tablename__ = "items"

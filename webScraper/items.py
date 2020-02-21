@@ -1,4 +1,4 @@
-'''
+"""
 The main goal in scraping is to extract structured data from unstructured sources,
 typically, web pages. Scrapy spiders can return the extracted data as Python dicts.
 While convenient and familiar, Python dicts lack structure: it is easy to make a
@@ -18,10 +18,10 @@ leaks with trackref), etc.
 
 # See documentation in:
 # https://docs.scrapy.org/en/latest/topics/items.html
-'''
-
+"""
 import scrapy
 from scrapy.loader.processors import MapCompose, TakeFirst
+
 
 class WebscraperItem(scrapy.Item):
     # define the fields for your item here like:

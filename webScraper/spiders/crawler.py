@@ -2,6 +2,7 @@ import scrapy
 from scrapy.loader import ItemLoader
 from ..items import WebscraperItem
 
+
 class CrawlerSpider(scrapy.Spider):
     # do not change name variables
     # from next 2 lines
@@ -10,8 +11,8 @@ class CrawlerSpider(scrapy.Spider):
 
     # custom definitions
     def parse(self, response):
+        self.logger.info('Parse function called on {}'.format(response.url))
         # initialization of item instance
-        items = WebscraperItem()
         product_content = response.xpath("//div[@class='card-section-wrapper js-section-wrapper']")
 
         # simple loop
@@ -36,7 +37,3 @@ class CrawlerSpider(scrapy.Spider):
             if next_page is not None and next_page != "javascript:void(0)":
                 next_page = response.urljoin(next_page)
                 yield scrapy.Request(next_page, callback=self.parse)
-
-
-
-

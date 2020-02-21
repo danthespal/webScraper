@@ -1,4 +1,4 @@
-'''
+"""
 After an item has been scraped by a spider, it is sent to the Item Pipeline
  which processes it through several components that are executed sequentially.
 
@@ -16,12 +16,13 @@ storing the scraped item in a database
 
 # Don't forget to add your pipeline to the ITEM_PIPELINES setting
 # See: https://docs.scrapy.org/en/latest/topics/item-pipeline.html
-'''
+"""
 
 from sqlalchemy.orm import sessionmaker
 from .models import Product, db_connect, create_table
 from scrapy.exceptions import DropItem
 import logging
+
 
 class DuplicatesScraperPipeline(object):
 
@@ -37,13 +38,14 @@ class DuplicatesScraperPipeline(object):
 
     def process_item(self, item, spider):
         session = self.Session()
-        exist_product_name = session.query(Product).filter_by(product_name = item["product_name"]).first()
+        exist_product_name = session.query(Product).filter_by(product_name=item["product_name"]).first()
         if exist_product_name is not None:  # the current product_name exists
             raise DropItem("Duplicate item found: %s" % item["product_name"])
             session.close()
         else:
             return item
             session.close()
+
 
 class SaveWebscraperPipeline(object):
     def __init__(self):
