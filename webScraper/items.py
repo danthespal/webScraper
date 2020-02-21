@@ -36,6 +36,7 @@ class WebscraperItem(Item):
     #
     # see https://docs.scrapy.org/en/latest/topics/loaders.html
     # to understand why we use loaders
+    id = Field()
     product_name = Field(
         input_processor=MapCompose(str.strip, remove_unicode),
         output_processor=TakeFirst()

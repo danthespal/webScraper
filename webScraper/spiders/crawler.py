@@ -9,6 +9,9 @@ class CrawlerSpider(scrapy.Spider):
     name = 'crawler'
     start_urls = ['https://www.emag.ro/laptopuri/c']
 
+    # custom definitions
+    index = 1
+
     def parse(self, response):
         self.logger.info('Parse function called on {}'.format(response.url))
 
@@ -24,6 +27,10 @@ class CrawlerSpider(scrapy.Spider):
             so the .css() function is basically syntactic sugar for .xpath().
             * use xpath selector for better performance in the future
             """
+            index = self.index
+            self.index += 1
+            loader.add_value('id', index)
+
             loader.add_xpath('product_name', './/a[@class="product-title js-product-url"]/text()')
             loader.add_xpath('product_price', './/p[@class="product-new-price"]/text()')
             loader.add_xpath('product_initial_price', './/s/text()')
